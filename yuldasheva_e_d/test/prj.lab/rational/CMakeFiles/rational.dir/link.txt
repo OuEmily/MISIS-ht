@@ -1,0 +1,2 @@
+/Library/Developer/CommandLineTools/usr/bin/ar qc librational.a CMakeFiles/rational.dir/rational.cpp.o
+/Library/Developer/CommandLineTools/usr/bin/ranlib librational.a
