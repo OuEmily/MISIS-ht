@@ -13,7 +13,7 @@ class Rational {
         Rational(int32_t numerator);
         Rational(int32_t numerator, int32_t denumerator);
         
-        bool operator==(const Rational&);
+        bool operator==(const Rational&) const;
         bool operator!=(const Rational&);
         bool operator>(const Rational&);
         bool operator<(const Rational&);
@@ -40,12 +40,6 @@ class Rational {
         Rational& operator=(const Rational& rhs) = default;
         ~Rational() = default;
 
-    private:
-        int32_t num;
-        int32_t denum;
-        
-        static const char slesh = '/';
-
         void simple() {
             int32_t nod = Nod(num, denum);
             num /= nod;
@@ -57,6 +51,14 @@ class Rational {
                 num = std::abs(num);
             }
         }
+
+    private:
+        int32_t num;
+        int32_t denum;
+        
+        static const char slesh = '/';
+
+        
 
         static int32_t Nod(int32_t a, int32_t b) {
             a = std::abs(a);
