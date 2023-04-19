@@ -26,7 +26,7 @@ Rational::Rational(int32_t numerator, int32_t denumerator) {
 
     }
 
-bool Rational::operator==(const Rational& rhs) {
+bool Rational::operator==(const Rational& rhs) const {
     return (denum == rhs.GetDenum() && num == rhs.GetNum());
 }
 
@@ -56,14 +56,16 @@ Rational& Rational::operator+=(const Rational& rhs) {
     num = rhs.num * (BDN/rhs.denum) + num * (BDN/denum);
     denum = BDN;
     simple();
+    form();
     return *this;
 }
 
 Rational& Rational::operator-=(const Rational& rhs) {
     int32_t BDN = denum * rhs.denum;
-    num = rhs.num * (BDN/rhs.denum) - num * (BDN/denum);
+    num = num * (BDN/denum) - rhs.num * (BDN/rhs.denum);
     denum = BDN;
     simple();
+    form();
     return *this;
 }
 
@@ -71,13 +73,24 @@ Rational& Rational::operator*=(const Rational& rhs) {
     num = rhs.num * num;
     denum = rhs.denum * denum;
     simple();
+    form();
     return *this;
 }
 
 Rational& Rational::operator/=(const Rational& rhs) {
-    num = rhs.num * denum;
-    denum = rhs.denum * num;
-    simple();
+    if (rhs.num == 0) { 
+        throw std::invalid_argument("Expected denumeratoir not equal to zero");
+    }
+    if (*this!=rhs){
+        num *= rhs.denum;
+        denum *= rhs.num;
+        simple();
+        form();
+    }
+    else {
+        num = 1;
+        denum = 1;
+    }
     return *this;
 }
 
@@ -85,16 +98,26 @@ Rational& Rational::operator/=(const Rational& rhs) {
 Rational operator+(const Rational& lhs, const Rational& rhs) {
     Rational temp(lhs);
     temp += rhs;
+    temp.simple();
+    temp.form();
     return temp;
+}
+
+Rational operator-(const Rational& lhs, const Rational& rhs) {
+	Rational temp(lhs);
+	temp -= rhs;
+    temp.simple();
+    temp.form();
+	return temp;
 }
 
 Rational operator*(const Rational& lhs, const Rational& rhs) {
   return Rational(lhs) *= rhs;
 }
 
-Rational operator-(const Rational& lhs, const Rational& rhs) {
-  return Rational(lhs) -= rhs;
-}
+//Rational operator-(const Rational& lhs, const Rational& rhs) {
+  //return Rational(lhs) -= rhs;
+//}
 
 Rational operator/(const Rational& lhs, const Rational& rhs) {
   return Rational(lhs) /= rhs;
@@ -102,6 +125,8 @@ Rational operator/(const Rational& lhs, const Rational& rhs) {
 
 Rational& Rational::operator++() {
     *this += 1;
+    simple();
+    form();
     return *this;
 }
 
@@ -115,12 +140,16 @@ Rational& Rational::operator--() {
 Rational& Rational::operator++(int32_t) {
     Rational a(*this);
     ++(*this);
+    simple();
+    form();
     return a;
 }
 
 Rational& Rational::operator--(int32_t) {
     Rational a(*this);
     --(*this);
+    simple();
+    form();
     return a;
 }
 
