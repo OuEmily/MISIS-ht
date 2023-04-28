@@ -5,10 +5,10 @@
 
 
 TEST_CASE("construct") {
-  Arrayd first;
-  Arrayd second(4);
-  //Arrayd third(3, 6.6);
-  //Arrayd fourth = third;
+  ArrayD first;
+  ArrayD second(4);
+  //ArrayD third(3, 6.6);
+  //ArrayD fourth = third;
   //for (int i = 0; i < 3; i += 1) {
   //  third[i] *= 2*i;
   //}
@@ -20,7 +20,7 @@ TEST_CASE("construct") {
 }
 
 TEST_CASE("push_back+insert") {
-  Arrayd m; //0 1 2 3 4
+  ArrayD m; //0 1 2 3 4
   // 0 1 2 100 3 4
   m.push_back(0); 
   m.push_back(1);
@@ -33,7 +33,7 @@ TEST_CASE("push_back+insert") {
   CHECK(m[4] == 3);
 }
 TEST_CASE("remove") {
-  Arrayd m; //0 1 2 3 4
+  ArrayD m; //0 1 2 3 4
   m.push_back(0);
   m.push_back(1);
   m.push_back(2);
@@ -51,7 +51,7 @@ TEST_CASE("remove") {
   CHECK(m[3] == 4);
 }
 TEST_CASE("struggle") {
-  Arrayd m; //0 1 2 3 4
+  ArrayD m; //0 1 2 3 4
   // 0 1 2 100 3 4
   m.push_back(0);
   m.push_back(1);
@@ -62,7 +62,7 @@ TEST_CASE("struggle") {
 }
 
 TEST_CASE("friend test") {
-  Arrayd arr;
+  ArrayD arr;
   CHECK_THROWS(arr[0]);
   CHECK(arr.ssize() == 0);
   arr.resize(5);
@@ -72,7 +72,7 @@ TEST_CASE("friend test") {
   CHECK_THROWS(arr[7]);
   arr[1] = 56.24;
   CHECK(arr[1] == 56.24);
-  Arrayd arr1(arr);
+  ArrayD arr1(arr);
   for (int i = 0; i < arr1.ssize(); i++) {
     CHECK(arr1[i] == arr[i]);
   }
