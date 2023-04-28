@@ -25,9 +25,11 @@ class Rational {
         Rational& operator*=(const Rational&);
         Rational& operator/=(const Rational&);
         Rational& operator++();
-        Rational& operator++(int);
+        Rational& operator++(int32_t);
         Rational& operator--();
-        Rational& operator--(int);
+        Rational& operator--(int32_t);
+
+        Rational operator-() const;
         
         std::ostream& writeTo(std::ostream& ostrm) const;
 
