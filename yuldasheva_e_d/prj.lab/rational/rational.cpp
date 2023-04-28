@@ -119,6 +119,11 @@ Rational operator*(const Rational& lhs, const Rational& rhs) {
   //return Rational(lhs) -= rhs;
 //}
 
+Rational Rational::operator-() const
+{
+    return Rational(-num, denum);
+}
+
 Rational operator/(const Rational& lhs, const Rational& rhs) {
   return Rational(lhs) /= rhs;
 }
@@ -138,10 +143,8 @@ Rational& Rational::operator--() {
 }
 
 Rational& Rational::operator++(int32_t) {
-    Rational a(*this);
-    ++(*this);
-    simple();
-    form();
+    Rational a(num, denum);
+    *this += 1;
     return a;
 }
 
