@@ -1,12 +1,17 @@
 
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <doctest/doctest.h>
-#include <rational/rational.hpp>
+#include "rational/rational.hpp"
 #include <sstream>
+
+TEST_CASE("Testing Unary Operator -") {
+    Rational a{2, 3};
+	CHECK(-a == Rational(-2, 3));
+}
 
 TEST_CASE("Comparing Rationals with themselfs and integers") {
 
-    SUBCASE("comparing rationals")
+    SUBCASE("comparing Rationals")
     {
         Rational R = Rational(3, 2);
         Rational A;
@@ -35,7 +40,7 @@ TEST_CASE("Comparing Rationals with themselfs and integers") {
         CHECK((R <= C) == true);
         CHECK((R <= A) == false);
     }
-     SUBCASE("comparing rationals-integers")
+     SUBCASE("comparing Rationals-integers")
     {
         Rational R = Rational(3, 3);
         int32_t A = 0;
