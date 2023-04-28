@@ -1,7 +1,7 @@
 #include "include/arrayd/arrayd.hpp"
 #include <iostream>
 
-Arrayd::Arrayd(const std::ptrdiff_t n) {
+ArrayD::ArrayD(const std::ptrdiff_t n) {
 		
         if (n < 0) {
 			throw std::invalid_argument("invalid argumet");
@@ -11,7 +11,7 @@ Arrayd::Arrayd(const std::ptrdiff_t n) {
 		capacity_ = n *2;
 	}
 
-Arrayd::Arrayd(const Arrayd& rhs) {
+ArrayD::ArrayD(const ArrayD& rhs) {
     
     start_ = new double[rhs.ssize()];
     capacity_ = rhs.capacity_;
@@ -22,7 +22,7 @@ Arrayd::Arrayd(const Arrayd& rhs) {
 
 }
 
-double& Arrayd::operator[](std::ptrdiff_t i)
+double& ArrayD::operator[](std::ptrdiff_t i)
 {
     if (i < 0 || i >= array_size_) {
 		throw std::out_of_range("Out of range");
@@ -30,7 +30,7 @@ double& Arrayd::operator[](std::ptrdiff_t i)
 	return *(start_ + i);
 }
 
-const double& Arrayd::operator[](const std::ptrdiff_t i) const {
+const double& ArrayD::operator[](const std::ptrdiff_t i) const {
     if (i < 0 || i >= array_size_) {
 		throw std::out_of_range("Out of range");
     }
@@ -38,7 +38,7 @@ const double& Arrayd::operator[](const std::ptrdiff_t i) const {
 }
 
 
-Arrayd& Arrayd::operator=(const Arrayd& arr) {
+ArrayD& ArrayD::operator=(const ArrayD& arr) {
 	if (&arr != this) {
         array_size_ = arr.ssize();
         capacity_ =  arr.capacity_; // логический размеp
@@ -52,7 +52,7 @@ Arrayd& Arrayd::operator=(const Arrayd& arr) {
 }
 
 
-void Arrayd::resize(const std::ptrdiff_t new_size) {
+void ArrayD::resize(const std::ptrdiff_t new_size) {
 		if (new_size <= 0) {
 			throw std::out_of_range("Out of range");
 		}
@@ -75,12 +75,12 @@ void Arrayd::resize(const std::ptrdiff_t new_size) {
 		
 
 	}
-void Arrayd::push_back(const double& el) { // вставляем элемент в конец
+void ArrayD::push_back(const double& el) { // вставляем элемент в конец
 	resize(ssize() + 1);
 	start_[ssize() - 1] = el;
 }
 
-void Arrayd::insert(std::ptrdiff_t index, const double& el) {
+void ArrayD::insert(std::ptrdiff_t index, const double& el) {
     if (index < 0 || index > array_size_){
         throw std::out_of_range("Out of range");
     }
@@ -94,13 +94,13 @@ void Arrayd::insert(std::ptrdiff_t index, const double& el) {
 		}
 	}
 }
-void Arrayd::remove(const std::ptrdiff_t ind) {
+void ArrayD::remove(const std::ptrdiff_t ind) {
 	for (int i = ind; i < array_size_ - 1; i += 1) {
 		std::swap(start_[i], start_[i + 1]);
 	}
     array_size_ -= 1;
 }
 
-std::ptrdiff_t Arrayd::ssize() const noexcept{
+std::ptrdiff_t ArrayD::ssize() const noexcept{
 		return array_size_;
 	}
