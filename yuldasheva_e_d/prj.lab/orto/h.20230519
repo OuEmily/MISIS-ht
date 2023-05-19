@@ -1,0 +1,48 @@
+#include <sstream>
+
+class Orto {
+    public:
+        //Orto(double x_up, double x_down, double y_right, double y_left);
+        Orto() = default;
+        //Orto&();
+        ~Orto() = default;
+        double SetW(double y_right, double y_left) {
+             double width = y_right - y_left;
+             return width;
+        }
+
+        double SetH();
+        double GetW(Orto& fig) {
+            double width = 0;
+            if (y_left - y_right > x_down - x_up) {
+                width = x_down - x_up;
+            }
+            else if (y_left - y_right < x_down - x_up) {
+                width = y_left - y_right;
+            }
+            return width;
+        }
+        double GetH(Orto& fig) {
+            double heigh = 0;
+            if (y_left - y_right > x_down - x_up) {
+                heigh = y_left - y_right;
+            }
+            else if (y_left - y_right < x_down - x_up) {
+                heigh = x_down - x_up;
+            }
+        }
+
+
+    private:
+       double x_down = 0;
+       double x_up = 0;
+       double y_left = 0;
+       double y_right = 0;
+};
+int main () {
+    Orto fig;
+    
+
+
+
+}
