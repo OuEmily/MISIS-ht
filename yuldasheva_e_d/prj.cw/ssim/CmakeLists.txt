@@ -1,0 +1,9 @@
+add_library(ssim ssim.cpp include/ssim/ssim.hpp)
+set_property(TARGET ssim PROPERTY CXX_STANDARD 20) 
+target_include_directories(ssim PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+install(TARGETS ssim
+        DESTINATION lib)
+target_link_libraries( ssim ${OpenCV_LIBS})
