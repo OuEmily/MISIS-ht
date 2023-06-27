@@ -32,8 +32,6 @@ install(TARGETS ssim_test RUNTIME
   DESTINATION bin
 )
 
-
-
 #target_include_directories(prj.cw/images PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
 #install(FILES prj.cw/images/images.png prj.cw/images/images22.png DESTINATION data/image)
@@ -44,7 +42,7 @@ install(DIRECTORY ${CMAKE_SOURCE_DIR}/data/
   DESTINATION data
 )
 
-install(DIRECTORY ${CMAKE_SOURCE_DIR}/images/
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/prj.cw/images/
   DESTINATION data
 )
 
