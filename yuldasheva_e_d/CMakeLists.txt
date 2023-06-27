@@ -15,8 +15,12 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO ${CMAKE_CURRENT_SOURCE_DIR}/bi
 
 project(cpp2023_test)
 
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+  set(CMAKE_INSTALL_PREFIX "${CMAKE_SOURCE_DIR}/install" CACHE PATH "..." FORCE)
+endif()
+
 find_package(doctest REQUIRED)
-#find_package(Doxygen REQUIRED)
+find_package(Doxygen REQUIRED)
 find_package( OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 
@@ -40,66 +44,15 @@ install(DIRECTORY ${CMAKE_SOURCE_DIR}/data/
   DESTINATION data
 )
 
-if(WIN32)
-    set(OpenCV_RUNTIME_PATH "${OpenCV_DIR}/../../bin")
-else()
-    set(OpenCV_RUNTIME_PATH "${OpenCV_DIR}/../../lib")
-endif()
-
-install(DIRECTORY "${OpenCV_RUNTIME_PATH}/"
-  DESTINATION bin
-  FILES_MATCHING PATTERN "*zlib*"
-)
-install(DIRECTORY "${OpenCV_RUNTIME_PATH}/"
-  DESTINATION bin
-  FILES_MATCHING PATTERN "*tiff*"
-)
-install(DIRECTORY "${OpenCV_RUNTIME_PATH}/"
-  DESTINATION bin
-  FILES_MATCHING PATTERN "*opencv_videoio*"
-)
-install(DIRECTORY "${OpenCV_RUNTIME_PATH}/"
-  DESTINATION bin
-  FILES_MATCHING PATTERN "*opencv_imgproc*"
-)
-install(DIRECTORY "${OpenCV_RUNTIME_PATH}/"
-  DESTINATION bin
-  FILES_MATCHING PATTERN "*opencv_imgcodecs*"
-)
-install(DIRECTORY "${OpenCV_RUNTIME_PATH}/"
-  DESTINATION bin
-  FILES_MATCHING PATTERN "*opencv_highgui*"
-)
-install(DIRECTORY "${OpenCV_RUNTIME_PATH}/"
-  DESTINATION bin
-  FILES_MATCHING PATTERN "*opencv_core*"
-)
-install(DIRECTORY "${OpenCV_RUNTIME_PATH}/"
-  DESTINATION bin
-  FILES_MATCHING PATTERN "*libwebpdecoder*"
-)
-install(DIRECTORY "${OpenCV_RUNTIME_PATH}/"
-  DESTINATION bin
-  FILES_MATCHING PATTERN "*libsharpyuv*"
-)
-install(DIRECTORY "${OpenCV_RUNTIME_PATH}/"
-  DESTINATION bin
-  FILES_MATCHING PATTERN "*libpng*"
-)
-install(DIRECTORY "${OpenCV_RUNTIME_PATH}/"
-  DESTINATION bin
-  FILES_MATCHING PATTERN "*liblzma*"
-)
-install(DIRECTORY "${OpenCV_RUNTIME_PATH}/"
-  DESTINATION bin
-  FILES_MATCHING PATTERN "*jpeg*"
-)
-install(DIRECTORY "${OpenCV_RUNTIME_PATH}/"
-  DESTINATION bin
-  FILES_MATCHING PATTERN "*libwebp*"
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/images/
+  DESTINATION data
 )
 
-find_package(Doxygen REQUIRED)
+
+install(DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE}/
+DESTINATION bin FILES_MATCHING PATTERN "*test*" 
+EXCLUDE PATTERN "*" )
+
 
 
 
