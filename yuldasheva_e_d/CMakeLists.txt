@@ -38,9 +38,10 @@ install(TARGETS ssim_test RUNTIME
 #file(COPY prj.cw/images/images.png prj.cw/images/images22.png DESTINATION ${CMAKE_CURRENT_DIR}/images)
 #file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/prj.cw/images/images.png ${CMAKE_CURRENT_SOURCE_DIR}/prj.cw/images/images22.png  DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/data)
 
-install(DIRECTORY ${CMAKE_SOURCE_DIR}/data/
-  DESTINATION data
-)
+
+#install(DIRECTORY ${CMAKE_SOURCE_DIR}/data/
+#  DESTINATION data
+#)
 
 install(DIRECTORY ${CMAKE_SOURCE_DIR}/prj.cw/images/
   DESTINATION data
@@ -67,7 +68,7 @@ if(DOXYGEN_FOUND)
 endif()
 
 if(DOXYGEN_FOUND)
-       install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/doxyden
+       install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/doxygen
                DESTINATION docs)
    endif()
 
